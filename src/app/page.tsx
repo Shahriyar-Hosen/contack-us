@@ -1,4 +1,4 @@
-import { ParsonButton } from "@/components";
+import { ContactForm, ParsonButton } from "@/components";
 import { parsons } from "@/lib/data";
 import Image from "next/image";
 
@@ -22,7 +22,7 @@ const HomePage = () => {
         <div className="left-0 bottom-0 absolute size-[152px] rounded-full blur-[200px] bg-secondary" />
 
         <div className="w-full h-full p-5 flex justify-between items-start relative z-20">
-          <div className="w-full max-w-[506px] mx-auto p-10">
+          <div className="w-full max-w-[506px] mx-auto p-10 space-y-10">
             <div className="space-y-2.5">
               <h2 className="font-semibold text-3xl leading-[36.31px] tracking-[-2%] text-start">
                 Let’s connect Our Team!
@@ -33,6 +33,7 @@ const HomePage = () => {
                 ))}
               </div>
             </div>
+            <ContactForm />
           </div>
 
           <div className="w-full max-w-[516px] relative">
