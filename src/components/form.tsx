@@ -24,7 +24,7 @@ export const ContactForm: FC<TProps> = ({ activeParson }) => {
         name === "fistName" || name === "lastName"
           ? `${name === "fistName" ? value : data.fistName} ${
               name === "lastName" ? value : data.lastName || ""
-            }`
+            }`.trim()
           : prv.name,
     }));
   };
