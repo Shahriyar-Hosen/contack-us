@@ -36,7 +36,7 @@ export const ContactForm: FC<TProps> = ({ activeParson }) => {
     if (data.phone) {
       const reg = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
       if (!reg.test(data.phone))
-        toast.error("Please enter a valid phone number!");
+        return toast.error("Please enter a valid phone number!");
     }
 
     if (data.name && data.email && data.phone && data.message) {
