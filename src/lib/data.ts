@@ -1,8 +1,5 @@
-interface IParson {
-  id: number;
-  name: string;
-  email: string;
-}
+import { IParson } from "@/types";
+
 export const parsons: IParson[] = [
   {
     id: 1,
