@@ -12,7 +12,6 @@ const defaultValue = { name: "", email: "", phone: "", message: "" };
 type TProps = { activeParson: IParson[] };
 export const ContactForm: FC<TProps> = ({ activeParson }) => {
   const [data, setData] = useState<IContact>(defaultValue);
-  console.log("🚀 ~ data:", data);
 
   type InputEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
   const handleChange = (e: InputEvent) => {
