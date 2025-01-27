@@ -1,23 +1,17 @@
 "use client";
 
-import { IParson } from "@/types";
+import { sendMessage } from "@/server/mail";
+import { IContact, IParson } from "@/types";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "./button";
 import { Input, Textarea } from "./input";
 
-interface ContactForm {
-  fistName?: string;
-  lastName?: string;
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-}
 const defaultValue = { name: "", email: "", phone: "", message: "" };
 
 type TProps = { activeParson: IParson[] };
-export const ContactForm: FC<TProps> = ({}) => {
-  const [data, setData] = useState<ContactForm>(defaultValue);
+export const ContactForm: FC<TProps> = ({ activeParson }) => {
+  const [data, setData] = useState<IContact>(defaultValue);
 
   type InputEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
   const handleChange = (e: InputEvent) => {
@@ -34,9 +28,15 @@ export const ContactForm: FC<TProps> = ({}) => {
     }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("🚀 ~ ContactForm ~ data:", data);
+    const parsons = activeParson.map((parson) => parson.email);
+
+    toast.promise(sendMessage(parsons, data), {
+      loading: "Loading...",
+      success: "Message sent successfully! 🚀",
+      error: "Failed to send message! 😢",
+    });
   };
 
   return (
