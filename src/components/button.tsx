@@ -1,11 +1,16 @@
+import { cn } from "@/lib/utils";
 import { ButtonHTMLAttributes, FC } from "react";
 
 type IButton = ButtonHTMLAttributes<HTMLButtonElement>;
-export const ParsonButton: FC<IButton> = ({ children, ...props }) => {
+export const ParsonButton: FC<IButton> = (props) => {
+  const { children, className, ...others } = props || {};
   return (
     <button
-      {...props}
-      className="text-sm px-5 py-1 rounded-full bg-slate-300/20 hover:bg-secondary/30 transition-all delay-100 active:bg-gradient-to-r from-secondary to-primary"
+      {...others}
+      className={cn(
+        "text-sm px-5 py-1 rounded-full bg-slate-300/20 hover:bg-secondary/30 transition-all delay-100 active:bg-gradient-to-r from-secondary to-primary",
+        className
+      )}
     >
       {children}
     </button>

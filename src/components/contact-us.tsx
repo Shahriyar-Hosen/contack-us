@@ -6,16 +6,14 @@ import { useState } from "react";
 import { ContactForm, ParsonButton } from ".";
 
 export const ContactUs = () => {
-  const [selectedParson, setSelectedParson] = useState<IParson[]>([]);
+  const [activeParson, setActiveParson] = useState<IParson[]>([]);
 
-  console.log("🚀 ~ ContactUs ~ selectedParson:", selectedParson);
+  const isActive = (parson: IParson) => activeParson.includes(parson);
 
   const handleSelect = (parson: IParson) => {
-    if (selectedParson.includes(parson)) {
-      setSelectedParson((prv) => prv.filter((item) => item.id !== parson.id));
-    } else {
-      setSelectedParson((prv) => [...prv, parson]);
-    }
+    if (isActive(parson)) {
+      setActiveParson((prv) => prv.filter((item) => item.id !== parson.id));
+    } else setActiveParson((prv) => [...prv, parson]);
   };
 
   return (
@@ -26,13 +24,21 @@ export const ContactUs = () => {
         </h2>
         <div className="space-x-2.5">
           {parsons.map((item) => (
-            <ParsonButton onClick={() => handleSelect(item)} key={item.id}>
+            <ParsonButton
+              onClick={() => handleSelect(item)}
+              key={item.id}
+              className={
+                isActive(item)
+                  ? "bg-gradient-to-r from-secondary to-primary"
+                  : ""
+              }
+            >
               {item.name}
             </ParsonButton>
           ))}
         </div>
       </div>
-      <ContactForm />
+      <ContactForm activeParson={activeParson} />
     </div>
   );
 };

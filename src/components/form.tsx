@@ -1,6 +1,7 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { IParson } from "@/types";
+import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { Button } from "./button";
 import { Input, Textarea } from "./input";
 
@@ -13,7 +14,9 @@ interface ContactForm {
   message: string;
 }
 const defaultValue = { name: "", email: "", phone: "", message: "" };
-export const ContactForm = () => {
+
+type TProps = { activeParson: IParson[] };
+export const ContactForm: FC<TProps> = ({}) => {
   const [data, setData] = useState<ContactForm>(defaultValue);
 
   type InputEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
