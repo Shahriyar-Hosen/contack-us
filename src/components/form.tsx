@@ -32,11 +32,20 @@ export const ContactForm: FC<TProps> = ({ activeParson }) => {
     e.preventDefault();
     const parsons = activeParson.map((parson) => parson.email);
 
-    toast.promise(sendMessage(parsons, data), {
-      loading: "Loading...",
-      success: "Message sent successfully! 🚀",
-      error: "Failed to send message! 😢",
-    });
+    if (data.phone) {
+      const reg = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+      if (!reg.test(data.phone))
+        toast.error("Please enter a valid phone number!");
+    }
+
+    if (data.name && data.email && data.phone && data.message) {
+      toast.promise(sendMessage(parsons, data), {
+        loading: "Loading...",
+        success: "Message sent successfully! 🚀",
+        error: "Failed to send message! 😢",
+      });
+      setData(defaultValue);
+    } else toast.error("Please fill all the fields!");
   };
 
   return (
